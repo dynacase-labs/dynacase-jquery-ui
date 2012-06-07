@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<module name="@PACKAGE@" version="@VERSION@" release="@RELEASE@" basecomponent="no">
+
+    <description>Jquery User Interfaces.</description>
+    <requires>
+    </requires>
+
+    <parameters>
+        <param name="jqueryuisrc_url" label="JQuery-ui source download URL" type="text"
+               volatile="yes" onupgrade="W"
+               default="http://ftp.dynacase.org/third-party/jquery-ui-src-1.9menubar.zip"/>
+        <param name="jqueryui_url" label="JQuery-ui stable download URL" type="text"
+               volatile="yes" onupgrade="W"
+               default="http://ftp.dynacase.org/third-party/jquery-ui-1.8.21.custom.zip"/>
+    </parameters>
+
+    <pre-install>
+        <check type="syscommand" command="gunzip"/>
+        <check type="syscommand" command="tar"/>
+        <check type="syscommand" command="find"/>
+        <check type="syscommand" command="chmod"/>
+    </pre-install>
+
+    <pre-upgrade>
+        <check type="syscommand" command="gunzip"/>
+        <check type="syscommand" command="tar"/>
+        <check type="syscommand" command="find"/>
+        <check type="syscommand" command="chmod"/>
+    </pre-upgrade>
+
+    <post-install>
+        <download href="@jqueryuisrc_url" action="programs/jquery-ui_src_install">
+            <label lang="en">Download and install
+                JQuery UI development source
+            </label>
+        </download>
+        <download href="@jqueryui_url" action="programs/jquery-ui_install">
+            <label lang="en">Download and install
+                JQuery UI
+            </label>
+        </download>
+    </post-install>
+
+    <post-upgrade>
+        <download href="@jqueryuisrc_url" action="programs/jquery-ui_src_install">
+            <label lang="en">Download and install
+                JQuery UI development source
+            </label>
+        </download>
+        <download href="@jqueryui_url" action="programs/jquery-ui_install">
+            <label lang="en">Download and install
+                JQuery UI
+            </label>
+        </download>
+    </post-upgrade>
+
+</module>
