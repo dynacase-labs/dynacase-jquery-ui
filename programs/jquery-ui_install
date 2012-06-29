@@ -131,7 +131,7 @@ if ($handle = opendir('lib/jquery-ui/css')) {
     while (false !== ($entry = readdir($handle))) {
         echo "Entry $entry\n";
         if (strpos($entry,'.')===false) {
-	  $cmd = sprintf("cd lib/jquery-ui/css/$entry && ln -sf `ls -1t jquery-ui*custom.css | head -1` jquery.css");
+	  $cmd = sprintf("cd lib/jquery-ui/css/$entry && ln -sf `ls -1t jquery-ui*custom.css | head -1` jquery-ui.css");
 	 
 	  system($cmd, $ret);
 	}	
