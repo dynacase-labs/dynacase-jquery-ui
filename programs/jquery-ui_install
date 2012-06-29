@@ -118,6 +118,27 @@ if ($ret !== 0) {
     exit(1);
 }
 
+$cmd = sprintf("cd lib/jquery-ui/js && ln -sf `ls -1t jquery-ui*min.js | head -1` jquery-ui.js");
+system($cmd, $ret);
+$cmd = sprintf("cd lib/jquery-ui/js && ln -sf `ls -1t jquery-[0-9]*min.js | head -1` jquery.js");
+system($cmd, $ret);
+
+if ($handle = opendir('lib/jquery-ui/css')) {
+    echo "Directory handle: $handle\n";
+    echo "Entries:\n";
+
+    /* This is the correct way to loop over the directory. */
+    while (false !== ($entry = readdir($handle))) {
+        echo "Entry $entry\n";
+        if (strpos($entry,'.')===false) {
+	  $cmd = sprintf("cd lib/jquery-ui/css/$entry && ln -sf `ls -1t jquery-ui*custom.css | head -1` jquery.css");
+	 
+	  system($cmd, $ret);
+	}	
+    }
+    closedir($handle);
+}
+
 // Cleanup tempdir
 $cmd = sprintf('rm -Rf "%s"', escapeshellcmd($tempdir));
 system($cmd, $ret);
