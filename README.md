@@ -1,4 +1,4 @@
-dynacase-jquery-ui
-==================
+dynacase-jquery-ui-installer
+============================
 
 JQuery Ui packaging
