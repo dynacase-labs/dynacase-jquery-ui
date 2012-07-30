@@ -5,6 +5,10 @@
     <requires>
     </requires>
 
+    <replaces>
+      <module name="dynacase-jquery-ui" />
+    </replaces>
+
     <parameters>
         <param name="jqueryuisrc_url" label="JQuery-ui source download URL" type="text"
                volatile="yes" onupgrade="W"
