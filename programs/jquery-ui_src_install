@@ -99,7 +99,7 @@ if ($jqui_subdir === false) {
     print sprintf("Could not find a valid jquery-ui subdir in '%s'\n", $tempdir);
     exit(1);
 }
-$jqui_subdir = 'lib/jquery-ui/src';
+$jqui_subdir = 'lib/jquery-ui/devel-src';
 // Create jquery-ui dir if it does not exists
 if (!is_dir($jqui_subdir)) {
     $ret = mkdir($jqui_subdir);
@@ -117,6 +117,16 @@ if ($ret !== 0) {
     print sprintf('Error copying jquery-ui files (%s)\n', $cmd);
     exit(1);
 }
+
+
+$cmd = sprintf('cd %s/themes/base;mkdir -p original;mv jquery.ui.all.css original;cat jquery.ui.core.css jquery.ui.accordion.css jquery.ui.autocomplete.css jquery.ui.button.css jquery.ui.datepicker.css jquery.ui.dialog.css jquery.ui.menu.css jquery.ui.menubar.css jquery.ui.progressbar.css jquery.ui.resizable.css jquery.ui.selectable.css jquery.ui.slider.css jquery.ui.spinner.css jquery.ui.tabs.css jquery.ui.tooltip.css jquery.ui.theme.css > jquery.ui.all.css', escapeshellcmd($jqui_subdir));
+system($cmd, $ret);
+
+if ($ret !== 0) {
+    print sprintf('Error copying jquery-ui files (%s)\n', $cmd);
+    exit(1);
+}
+
 
 // Cleanup tempdir
 $cmd = sprintf('rm -Rf "%s"', escapeshellcmd($tempdir));
