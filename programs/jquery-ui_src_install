@@ -34,7 +34,7 @@ if (!is_file($ck_tgz)) {
     exit(1);
 }
 
-$ret = chdir(sprintf("%s", $WIFF_CONTEXT_ROOT));
+$ret = chdir($WIFF_CONTEXT_ROOT);
 if ($ret === false) {
     print sprintf("Could not change directory to '%s'\n", $WIFF_CONTEXT_ROOT);
     exit(1);
@@ -55,29 +55,29 @@ if ($ret === false) {
 }
 
 // Unpack archive in tempdir
-$cmd = sprintf('unzip "%s" -d "%s" > "%s" 2>&1', escapeshellcmd($ck_tgz), escapeshellcmd($tempdir),
-    escapeshellcmd($tmpfile));
+$cmd = sprintf('unzip %s -d %s > %s 2>&1', escapeshellarg($ck_tgz), escapeshellarg($tempdir),
+    escapeshellarg($tmpfile));
 system($cmd, $ret);
 
 $output = file_get_contents($tmpfile);
 @unlink($tmpfile);
 
 if ($ret !== 0) {
-    print sprintf('Error unzip  "%s"\n', escapeshellcmd($ck_tgz));
+    print sprintf("Error %s: %s\n", $cmd, $output);
     exit(1);
 }
 
 // Set directory/files rights
-$cmd = sprintf('find "%s" -type d -exec chmod 0755 {} \; > /dev/null 2>&1', escapeshellcmd($tempdir));
+$cmd = sprintf('find %s -type d -exec chmod 0755 {} \; > /dev/null 2>&1', escapeshellarg($tempdir));
 system($cmd, $ret);
 if ($ret !== 0) {
-    print sprintf('Error setting rights on directories\n');
+    print sprintf("Error setting rights on directories\n");
     exit(1);
 }
-$cmd = sprintf('find "%s" -type f -exec chmod 0644 {} \; > /dev/null 2>&1', escapeshellcmd($tempdir));
+$cmd = sprintf('find %s -type f -exec chmod 0644 {} \; > /dev/null 2>&1', escapeshellarg($tempdir));
 system($cmd, $ret);
 if ($ret !== 0) {
-    print sprintf('Error setting rights on files\n');
+    print sprintf("Error setting rights on files\n");
     exit(1);
 }
 
@@ -110,26 +110,26 @@ if (!is_dir($jqui_subdir)) {
 }
 
 // Copy new jquery-ui files over existing jquery-ui directory
-$cmd = sprintf('cp -r %s/* %s', escapeshellcmd($tempdir), escapeshellcmd($jqui_subdir));
+$cmd = sprintf('cp -r %s/* %s', escapeshellarg($tempdir), escapeshellarg($jqui_subdir));
 system($cmd, $ret);
 
 if ($ret !== 0) {
-    print sprintf('Error copying jquery-ui files (%s)\n', $cmd);
+    print sprintf("Error copying jquery-ui files (%s)\n", $cmd);
     exit(1);
 }
 
 
-$cmd = sprintf('cd %s/themes/base;mkdir -p original;mv jquery.ui.all.css original;cat jquery.ui.core.css jquery.ui.accordion.css jquery.ui.autocomplete.css jquery.ui.button.css jquery.ui.datepicker.css jquery.ui.dialog.css jquery.ui.menu.css jquery.ui.menubar.css jquery.ui.progressbar.css jquery.ui.resizable.css jquery.ui.selectable.css jquery.ui.slider.css jquery.ui.spinner.css jquery.ui.tabs.css jquery.ui.tooltip.css jquery.ui.theme.css > jquery.ui.all.css', escapeshellcmd($jqui_subdir));
+$cmd = sprintf('cd %s/themes/base && mkdir -p original && mv jquery.ui.all.css original && cat jquery.ui.core.css jquery.ui.accordion.css jquery.ui.autocomplete.css jquery.ui.button.css jquery.ui.datepicker.css jquery.ui.dialog.css jquery.ui.menu.css jquery.ui.menubar.css jquery.ui.progressbar.css jquery.ui.resizable.css jquery.ui.selectable.css jquery.ui.slider.css jquery.ui.spinner.css jquery.ui.tabs.css jquery.ui.tooltip.css jquery.ui.theme.css > jquery.ui.all.css', escapeshellarg($jqui_subdir));
 system($cmd, $ret);
 
 if ($ret !== 0) {
-    print sprintf('Error copying jquery-ui files (%s)\n', $cmd);
+    print sprintf("Error copying jquery-ui files (%s)\n", $cmd);
     exit(1);
 }
 
 
 // Cleanup tempdir
-$cmd = sprintf('rm -Rf "%s"', escapeshellcmd($tempdir));
+$cmd = sprintf('rm -Rf %s', escapeshellarg($tempdir));
 system($cmd, $ret);
 
 exit(0);
