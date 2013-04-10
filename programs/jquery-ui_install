@@ -142,7 +142,7 @@ if ($handle = opendir('lib/jquery-ui/css')) {
 // Cleanup tempdir
 $cmd = sprintf('rm -Rf %s', escapeshellarg($tempdir));
 system($cmd, $ret);
-
+$cmd = sprintf('%s/wsh.php --api=setStyle', escapeshellarg($WIFF_CONTEXT_ROOT));
+system($cmd, $ret);
 exit(0);
-
 ?>

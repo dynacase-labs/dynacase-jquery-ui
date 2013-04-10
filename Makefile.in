@@ -31,7 +31,13 @@ $(pubdir)/$(appname): $(pubdir)/lib
 $(pubdir)/$(appname)/.htaccess: htaccess $(pubdir)/$(appname)
 	cp htaccess $@
 
-publish: $(pubdir)/programs/jquery-ui_install $(pubdir)/programs/jquery-ui_src_install $(pubdir)/$(appname)/.htaccess
+$(pubdir)/STYLE/DEFAULT/rules.d: 
+	mkdir -p $@
+
+$(pubdir)/STYLE/DEFAULT/rules.d/jquery-ui.sty: rules.d/jquery-ui.sty $(pubdir)/STYLE/DEFAULT/rules.d
+	cp $< $@
+
+publish: $(pubdir)/programs/jquery-ui_install $(pubdir)/programs/jquery-ui_src_install $(pubdir)/$(appname)/.htaccess $(pubdir)/STYLE/DEFAULT/rules.d/jquery-ui.sty
 clean:
 	/bin/rm -f *.*~ config.* Makefile configure $(appname)_init.php info.xml $(PACKAGE)-*webinst
 	/bin/rm -fr autom4te.cache
