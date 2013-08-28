@@ -37,7 +37,13 @@ $(pubdir)/STYLE/DEFAULT/rules.d:
 $(pubdir)/STYLE/DEFAULT/rules.d/jquery-ui.sty: rules.d/jquery-ui.sty $(pubdir)/STYLE/DEFAULT/rules.d
 	cp $< $@
 
-publish: $(pubdir)/programs/jquery-ui_install $(pubdir)/programs/jquery-ui_src_install $(pubdir)/$(appname)/.htaccess $(pubdir)/STYLE/DEFAULT/rules.d/jquery-ui.sty
+$(pubdir)/.autoloader-ignore.d:
+	mkdir -p $@
+$(pubdir)/.autoloader-ignore.d/@PACKAGE@: autoloader-ignore-d $(pubdir)/.autoloader-ignore.d
+	cp $< $@
+
+publish: $(pubdir)/programs/jquery-ui_install $(pubdir)/programs/jquery-ui_src_install $(pubdir)/$(appname)/.htaccess $(pubdir)/STYLE/DEFAULT/rules.d/jquery-ui.sty $(pubdir)/.autoloader-ignore.d/@PACKAGE@
+
 clean:
 	/bin/rm -f *.*~ config.* Makefile configure $(appname)_init.php info.xml $(PACKAGE)-*webinst
 	/bin/rm -fr autom4te.cache
