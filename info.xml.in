@@ -23,6 +23,7 @@
         <check type="syscommand" command="tar"/>
         <check type="syscommand" command="find"/>
         <check type="syscommand" command="chmod"/>
+        <check type="syscommand" command="patch"/>
     </pre-install>
 
     <pre-upgrade>
@@ -30,6 +31,7 @@
         <check type="syscommand" command="tar"/>
         <check type="syscommand" command="find"/>
         <check type="syscommand" command="chmod"/>
+        <check type="syscommand" command="patch"/>
     </pre-upgrade>
 
     <post-install>

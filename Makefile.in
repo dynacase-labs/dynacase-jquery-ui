@@ -9,6 +9,8 @@ pages_not_php=fam2po.php po2js.php
 
 include $(utildir)/PubRule
 
+SUBDIR= lib
+
 $(pubdir):
 	mkdir -p $@
 
@@ -22,15 +24,6 @@ $(pubdir)/programs/jquery-ui_src_install: programs/jquery-ui_src_install $(pubdi
 	cp $< $@
 	chmod a+x $@
 
-$(pubdir)/lib: $(pubdir)
-	mkdir -p $@
-
-$(pubdir)/$(appname): $(pubdir)/lib
-	mkdir -p $@
-
-$(pubdir)/$(appname)/.htaccess: htaccess $(pubdir)/$(appname)
-	cp htaccess $@
-
 $(pubdir)/STYLE/DEFAULT/rules.d: 
 	mkdir -p $@
 
@@ -42,7 +35,7 @@ $(pubdir)/.autoloader-ignore.d:
 $(pubdir)/.autoloader-ignore.d/@PACKAGE@: autoloader-ignore-d $(pubdir)/.autoloader-ignore.d
 	cp $< $@
 
-publish: $(pubdir)/programs/jquery-ui_install $(pubdir)/programs/jquery-ui_src_install $(pubdir)/$(appname)/.htaccess $(pubdir)/STYLE/DEFAULT/rules.d/jquery-ui.sty $(pubdir)/.autoloader-ignore.d/@PACKAGE@
+publish: $(pubdir)/programs/jquery-ui_install $(pubdir)/programs/jquery-ui_src_install $(pubdir)/STYLE/DEFAULT/rules.d/jquery-ui.sty $(pubdir)/.autoloader-ignore.d/@PACKAGE@
 
 clean:
 	/bin/rm -f *.*~ config.* Makefile configure $(appname)_init.php info.xml $(PACKAGE)-*webinst
