@@ -132,6 +132,14 @@ if ($ret !== 0) {
 $cmd = sprintf('rm -Rf %s', escapeshellarg($tempdir));
 system($cmd, $ret);
 
+//Apply patch
+
+$cmd = sprintf("patch %s/ui/jquery.ui.menu.js %s/patch/menu.patch", escapeshellarg(
+    $jqui_subdir),
+    escapeshellarg($jqui_subdir));
+
+system($cmd);
+
 exit(0);
 
 ?>
