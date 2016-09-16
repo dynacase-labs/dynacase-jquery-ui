@@ -11,9 +11,12 @@
         <param name="jqueryuisrc_url" label="JQuery-ui source download URL" type="text"
                volatile="yes" onupgrade="W"
                default="http://ftp.dynacase.org/third-party/jquery-ui-src-1.9menubar.zip"/>
-        <param name="jqueryui_url" label="JQuery-ui stable download URL" type="text"
+        <param name="jqueryui_url" label="JQuery-ui 1.8 download URL" type="text"
                volatile="yes" onupgrade="W"
                default="http://ftp.dynacase.org/third-party/jquery-ui-1.8.21.custom.zip"/>
+        <param name="jqueryui112_url" label="JQuery-ui 1.12 download URL" type="text"
+               volatile="yes" onupgrade="W"
+               default="http://ftp.dynacase.org/third-party/jquery-ui-1.12.0.zip"/>
     </parameters>
 
     <pre-install>
@@ -39,8 +42,11 @@
             </label>
         </download>
         <download href="@jqueryui_url" action="programs/jquery-ui_install">
-            <label lang="en">Download and install
-                JQuery UI
+            <label lang="en">Download and install   JQuery UI 1.8
+            </label>
+        </download>
+        <download href="@jqueryui112_url" action="programs/jquery-ui_rawinstall">
+            <label lang="en">Download and install   JQuery UI 1.12
             </label>
         </download>
     </post-install>
@@ -52,8 +58,11 @@
             </label>
         </download>
         <download href="@jqueryui_url" action="programs/jquery-ui_install">
-            <label lang="en">Download and install
-                JQuery UI
+            <label lang="en">Download and install  JQuery UI 1.8
+            </label>
+        </download>
+        <download href="@jqueryui112_url" action="programs/jquery-ui_rawinstall">
+            <label lang="en">Download and install  JQuery UI 1.12
             </label>
         </download>
     </post-upgrade>

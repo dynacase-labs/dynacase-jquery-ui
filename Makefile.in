@@ -23,6 +23,9 @@ $(pubdir)/programs/jquery-ui_install: programs/jquery-ui_install $(pubdir)/progr
 $(pubdir)/programs/jquery-ui_src_install: programs/jquery-ui_src_install $(pubdir)/programs
 	cp $< $@
 	chmod a+x $@
+$(pubdir)/programs/jquery-ui_rawinstall: programs/jquery-ui_rawinstall $(pubdir)/programs
+	cp $< $@
+	chmod a+x $@
 
 $(pubdir)/STYLE/DEFAULT/rules.d: 
 	mkdir -p $@
@@ -35,7 +38,7 @@ $(pubdir)/.autoloader-ignore.d:
 $(pubdir)/.autoloader-ignore.d/@PACKAGE@: autoloader-ignore-d $(pubdir)/.autoloader-ignore.d
 	cp $< $@
 
-publish: $(pubdir)/programs/jquery-ui_install $(pubdir)/programs/jquery-ui_src_install $(pubdir)/STYLE/DEFAULT/rules.d/jquery-ui.sty $(pubdir)/.autoloader-ignore.d/@PACKAGE@
+publish: $(pubdir)/programs/jquery-ui_install $(pubdir)/programs/jquery-ui_rawinstall $(pubdir)/programs/jquery-ui_src_install $(pubdir)/STYLE/DEFAULT/rules.d/jquery-ui.sty $(pubdir)/.autoloader-ignore.d/@PACKAGE@
 
 clean:
 	/bin/rm -f *.*~ config.* Makefile configure $(appname)_init.php info.xml $(PACKAGE)-*webinst
